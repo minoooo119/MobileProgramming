@@ -13,10 +13,12 @@ class MainActivity : AppCompatActivity() {
         const val EXT_NAME="name"  //안에 값은 크게 중요하지 않음
         const val EXT_AGE="222" //어차피 자동완성으로 만들어짐
     }
+    val TAG:String = "로그"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val btnNewActivity=findViewById<Button>(R.id.buttonNewActivity)
+        Log.d(TAG, "MainActivity - onCreate() called")
 
         btnNewActivity.setOnClickListener{
             //실습
@@ -29,8 +31,11 @@ class MainActivity : AppCompatActivity() {
             "Welcome, ${name}(${age})!",
             Toast.LENGTH_SHORT
             ).show()*/
-            editTextName.text.clear()
-            editTextAGe.text.clear()
+
+//            처음에는 아래처럼 시도 but destroy함수 이용해보자구!
+
+//            editTextName.text.clear()
+//            editTextAGe.text.clear()
             //intent시에는 첫인자로 context--> this로 해도됨
             // 두번째는 어떤 activity에 넣을것인가.
             val intent= Intent(this,NothingActivity::class.java).apply{
@@ -53,14 +58,37 @@ class MainActivity : AppCompatActivity() {
             //stack 형태로 쌓이는 느낌임
             //남아있는거지 전 Activity가
             startActivity(intent)
-            finish()
+            //finish()
 
             //이제 값이 잘왔는지 확인해보자 --> Go NothingActivity
         }
     }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "MainActivity - onStart() called")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val editTextName=findViewById<EditText>(R.id.editTextTextName)
+        val editTextAGe=findViewById<EditText>(R.id.editTextAge)
+        editTextName.text.clear()
+        editTextAGe.text.clear()
+        Log.d(TAG, "MainActivity - onResume() called")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "MainActivity - onStop() called")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "MainActivity - onPause() called")
+    }
     override fun onDestroy() {
-        finish()
         super.onDestroy()
-        Log.i(localClassName,"onDestory")
+        Log.d(TAG, "MainActivity - onDestroy() called")
     }
 }

@@ -37,7 +37,6 @@ class NothingActivity : AppCompatActivity() {
         val intent2= Intent(this,MainActivity::class.java).apply{
         }
         btnNo.setOnClickListener{
-            startActivity(intent2)
             finish()
         }
 
