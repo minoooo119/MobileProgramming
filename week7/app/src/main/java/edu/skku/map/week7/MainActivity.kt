@@ -29,9 +29,10 @@ class MainActivity : AppCompatActivity() {
             val time=EditTime.text.toString()
             val desc=EditDesc.text.toString()
             Log.d(TAG, "MainActivity - onCreate() called")
+
             val intent_tosecond=Intent(this,secondActivity::class.java).apply {
-                putExtra(EXT_TIME,time)
-                putExtra(EXT_DESC,desc)
+                putExtra("time",time)
+                putExtra("desc",desc)
                 Log.d(TAG, "MainActivity - onCreate() called in intent")
             }
             startActivity(intent_tosecond)

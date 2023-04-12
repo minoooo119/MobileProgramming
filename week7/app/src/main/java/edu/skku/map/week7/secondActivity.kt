@@ -14,10 +14,10 @@ class secondActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
-        val time=intent.getStringExtra(MainActivity.EXT_TIME)
+        val time=intent.getStringExtra("time")
         val hour=time.toString().split(":")[0].toInt()
         val minute=time.toString().split(":")[1].toInt()
-        val desc=intent.getStringExtra(MainActivity.EXT_DESC)
+        val desc=intent.getStringExtra("desc")
         val textview=findViewById<TextView>(R.id.textViewcheck)
         textview.text="Do you want to set alram on time "+time+" with description '"+desc+"' ?"
         val ok=findViewById<Button>(R.id.okbtn)
