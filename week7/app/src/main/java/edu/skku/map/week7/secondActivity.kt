@@ -19,18 +19,22 @@ class secondActivity : AppCompatActivity() {
         val minute=time.toString().split(":")[1].toInt()
         val desc=intent.getStringExtra("desc")
         val textview=findViewById<TextView>(R.id.textViewcheck)
-        textview.text="Do you want to set alram on time "+time+" with description '"+desc+"' ?"
+        textview.text="Do you want to set alram on time $time with description $desc?"
         val ok=findViewById<Button>(R.id.okbtn)
         val canc=findViewById<Button>(R.id.canBtn)
 
         ok.setOnClickListener{
             val alramintent= Intent(AlarmClock.ACTION_SET_ALARM).apply {
+                //alramintent --> AlARM setting 해줌
+                //https://developer.android.com/guide/components/intents-common?hl=ko
+                //참고
                 putExtra(AlarmClock.EXTRA_MESSAGE,desc.toString())
                 putExtra(AlarmClock.EXTRA_HOUR,hour)
                 putExtra(AlarmClock.EXTRA_MINUTES,minute)
             }
 
             if (alramintent.resolveActivity(packageManager) != null) {
+                //alram intent는 이게 필요
                 Log.d(TAG, "secondActivity - onCreate() called")
                 startActivity(alramintent)
                 this.finish()
